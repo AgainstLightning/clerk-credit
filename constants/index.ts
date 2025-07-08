@@ -5,6 +5,11 @@ export const navLinks = [
     // icon: "/assets/icons/home.svg",
   },
   {
+    label: "Image Restore",
+    route: "/transformations/add/restore",
+    icon: "/assets/icons/image.svg",
+  },
+  {
     label: "Profile",
     route: "/profile",
     // icon: "/assets/icons/profile.svg",

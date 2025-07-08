@@ -16,7 +16,7 @@ const Sidebar = () => {
         <nav className="sidebar-nav">
           <SignedIn>
             <ul className="sidebar-nav_elements h-full">
-              {navLinks.slice(0, 1).map((link) => {
+              {navLinks.slice(0, 2).map((link) => {
                 const isActive = pathname === link.route;
                 return (
                   <li
@@ -33,7 +33,7 @@ const Sidebar = () => {
               })}
 
               <ul className="sidebar-nav_elements mt-auto">
-                {navLinks.slice(1).map((link) => {
+                {navLinks.slice(2).map((link) => {
                   const isActive = pathname === link.route;
                   return (
                     <li
