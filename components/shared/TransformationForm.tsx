@@ -15,6 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { startTransition } from "react";
+import { updateCredits } from "@/lib/actions/user.actions";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -22,7 +24,7 @@ const formSchema = z.object({
   }),
 });
 
-export function TransformationForm() {
+export function TransformationForm({ userId }: { userId: string }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,7 +34,14 @@ export function TransformationForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    onTransformHandler();
   }
+
+  const onTransformHandler = async () => {
+    startTransition(async () => {
+      await updateCredits(userId, -1);
+    });
+  };
 
   return (
     <Form {...form}>

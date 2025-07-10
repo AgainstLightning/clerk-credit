@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { TransformationForm } from "@/components/shared/TransformationForm";
 import Header from "@/components/shared/Header";
 import { transformationTypes } from "@/constants";
+import { getUserById } from "@/lib/actions/user.actions";
 // import { getUserById } from "@/lib/actions/user.actions";
 
 const AddTransformationTypePage = async ({
@@ -10,15 +11,16 @@ const AddTransformationTypePage = async ({
 }: SearchParamProps) => {
   const { userId } = auth();
   const transformation = transformationTypes[type];
+  console.log("userId", userId);
 
   if (!userId) redirect("/sign-in");
 
-  // const user = await getUserById(userId);
+  const user = await getUserById(userId);
 
   return (
     <>
       <Header title={transformation.title} subtitle={transformation.subTitle} />
-      <TransformationForm />
+      <TransformationForm userId={user._id} />
 
       {/* <section className="mt-10">
         <TransformationForm 

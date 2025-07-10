@@ -20,14 +20,24 @@ export const connectToDatabase = async () => {
     throw new Error("MONGODB_URL is not defined");
   }
 
-  cached.promise =
-    cached.promise ||
-    mongoose.connect(MONGODB_URL, {
-      dbName: "clerk-credit",
-      bufferCommands: false,
-    });
+  try {
+    cached.promise =
+      cached.promise ||
+      mongoose.connect(MONGODB_URL, {
+        dbName: "clerk-credit",
+        bufferCommands: false,
+      });
 
-  cached.conn = await cached.promise;
+    cached.conn = await cached.promise;
 
-  return cached.conn;
+    return cached.conn;
+  } catch (error) {
+    console.error("MongoDB Connection Error:");
+    console.error("Error details:", error);
+    console.error(
+      "Connection string (redacted):",
+      MONGODB_URL.replace(/\/\/[^@]*@/, "//****:****@")
+    );
+    throw error;
+  }
 };
