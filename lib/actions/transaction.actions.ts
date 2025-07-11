@@ -6,6 +6,7 @@ import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import Transaction from "../database/models/transaction.model";
 import { updateCredits } from "./user.actions";
+import { revalidatePath } from "next/cache";
 
 export async function checkoutCredits(transaction: CheckoutTransactionParams) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -31,7 +32,7 @@ export async function checkoutCredits(transaction: CheckoutTransactionParams) {
       buyerId: transaction.buyerId,
     },
     mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
+    success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
     cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
   });
 
@@ -49,6 +50,10 @@ export async function createTransaction(transaction: CreateTransactionParams) {
     });
 
     await updateCredits(transaction.buyerId, transaction.credits);
+    revalidatePath("/", "layout"); // Add "layout" to revalidate the root layout
+    revalidatePath("/profile");
+    revalidatePath("/credits");
+    revalidatePath("/transformations/add");
 
     return JSON.parse(JSON.stringify(newTransaction));
   } catch (error) {

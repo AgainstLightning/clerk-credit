@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { startTransition, useState } from "react";
 import { updateCredits } from "@/lib/actions/user.actions";
 import { InsufficientCreditsModal } from "./InsufficientCreditsModal";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -33,6 +34,7 @@ export function TransformationForm({
   creditBalance: number;
 }) {
   const [hasEnoughCredits, setHasEnoughCredits] = useState(true);
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,6 +54,8 @@ export function TransformationForm({
     }
     startTransition(async () => {
       await updateCredits(userId, -credits);
+      // Force router to revalidate everything
+      router.refresh();
     });
   };
 
