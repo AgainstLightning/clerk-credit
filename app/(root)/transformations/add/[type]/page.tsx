@@ -20,7 +20,10 @@ const AddTransformationTypePage = async ({
   return (
     <>
       <Header title={transformation.title} subtitle={transformation.subTitle} />
-      <TransformationForm userId={user._id} />
+      <TransformationForm
+        userId={user._id}
+        creditBalance={user.creditBalance}
+      />
 
       {/* <section className="mt-10">
         <TransformationForm 

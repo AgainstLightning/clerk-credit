@@ -1,10 +1,14 @@
+import Header from "@/components/shared/Header";
 import React from "react";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <>
+      <Header
+        title="Clerk and Credits Sandbox"
+        subtitle="This is a sandbox for testing Clerk and Credits functionality."
+      />
+    </>
   );
 };
 

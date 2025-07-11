@@ -5,17 +5,17 @@ export const navLinks = [
     // icon: "/assets/icons/home.svg",
   },
   {
-    label: "Image Restore",
+    label: "Generate Blog",
     route: "/transformations/add/restore",
     icon: "/assets/icons/image.svg",
   },
+  // {
+  //   label: "Profile",
+  //   route: "/profile",
+  //   // icon: "/assets/icons/profile.svg",
+  // },
   {
-    label: "Profile",
-    route: "/profile",
-    // icon: "/assets/icons/profile.svg",
-  },
-  {
-    label: "Credits",
+    label: "Buy Credits",
     route: "/credits",
     // icon: "/assets/icons/bag.svg",
   },
@@ -73,26 +73,40 @@ export const plans = [
   //   ],
   // },
   {
-    _id: 3,
-    name: "Premium Package",
+    _id: 1,
+    name: "Small",
     icon: "/assets/icons/free-plan.svg",
-    price: 199,
-    credits: 2000,
+    price: 5,
+    credits: 20,
     inclusions: [
       {
-        label: "2000 Credits",
+        label: "20 Credits",
         isIncluded: true,
       },
+    ],
+  },
+  {
+    _id: 2,
+    name: "Medium",
+    icon: "/assets/icons/free-plan.svg",
+    price: 10,
+    credits: 50,
+    inclusions: [
       {
-        label: "Full Access to Services",
+        label: "50 Credits",
         isIncluded: true,
       },
+    ],
+  },
+  {
+    _id: 3,
+    name: "Large",
+    icon: "/assets/icons/free-plan.svg",
+    price: 20,
+    credits: 100,
+    inclusions: [
       {
-        label: "Priority Customer Support",
-        isIncluded: true,
-      },
-      {
-        label: "Priority Updates",
+        label: "100 Credits",
         isIncluded: true,
       },
     ],
@@ -102,10 +116,10 @@ export const plans = [
 export const transformationTypes = {
   restore: {
     type: "restore",
-    title: "Restore Image",
-    subTitle: "Refine images by removing noise and imperfections",
+    title: "Generate Blog",
+    subTitle: "Generate a blog based on provided links and documentation",
     config: { restore: true },
-    icon: "image.svg",
+    icon: "scan.svg",
   },
   removeBackground: {
     type: "removeBackground",
