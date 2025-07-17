@@ -1,7 +1,12 @@
 "use client";
 
 import { navLinks } from "@/constants";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import {
+  OrganizationSwitcher,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -48,6 +53,9 @@ const Sidebar = ({ creditBalance }: { creditBalance: number }) => {
                       </h2>
                     </div>
                   </div>
+                </li>
+                <li className="flex-center cursor-pointer gap-2 text-nowrap overflow-hidden">
+                  <OrganizationSwitcher />
                 </li>
                 <li className="flex-center cursor-pointer gap-2 text-nowrap overflow-hidden">
                   <UserButton afterSignOutUrl="/" showName />
